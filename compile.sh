@@ -3,21 +3,23 @@
 # Based on https://github.com/CyberGrandChallenge/cb-testing/blob/master/cgc-cb.mk
 # '-Wl,-mcgc_i386' is my addition, though, so that 'clang -o exe' works. [J]
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 if [ "$#" -lt 1 ]; then
     echo "usage $0 <clang commands>";
     exit 1
 fi
 
-export CC=./bin/clang
-export LD=./bin/ld
-export CXX=./bin/clang++
-export OBJCOPY=./bin/objcopy
+export CC=$DIR/bin/clang
+export LD=$DIR/bin/ld
+export CXX=$DIR/bin/clang++
+export OBJCOPY=$DIR/bin/objcopy
 
 export LDFLAGS="-nostdlib -static -Wl,-mcgc_i386 $LDFLAGS"
-export  CFLAGS="-nostdlib -fno-builtin -nostdinc -isystem./include $CFLAGS"
-export LDLIBS="-L./lib -lcgc $LDLIBS"
+export  CFLAGS="-nostdlib -fno-builtin -nostdinc -isystem$DIR/include $CFLAGS"
+export LDLIBS="-L$DIR/lib -lcgc $LDLIBS"
 
-export PATH="./bin:$PATH"
+export PATH="$DIR/bin:$PATH"
 
 function compile() {
     $CC -Ilib/ \

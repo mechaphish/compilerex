@@ -60,7 +60,7 @@ int main() {
     send_all(1, "hello\n", 6);
     int len = receive_until(0, buf, '\n', 40);
     buf[len] = '\n';
-    send_msg(1, buf, len+1);
+    send_all(1, buf, len+1);
   }
 
 
