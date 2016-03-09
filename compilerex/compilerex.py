@@ -14,7 +14,7 @@ def compile(args):
     return res
 
 def compile_from_string(c_str, filename=None):
-    c_file = tempfile.mktemp(dir='/tmp/', prefix="c_file_")
+    c_file = tempfile.mktemp(dir='/tmp/', prefix="c_file_", suffix=".c")
 
     with open(c_file, "wb") as f:
         f.write(c_str)
