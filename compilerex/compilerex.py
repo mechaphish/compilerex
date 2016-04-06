@@ -36,6 +36,7 @@ def compile_from_string(c_str, filename=None):
 
 
     os.remove(c_file)
-    os.remove(outfile)
+    if filename is None:
+        os.remove(outfile)
 
     return result
