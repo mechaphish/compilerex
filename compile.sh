@@ -23,7 +23,7 @@ export PATH="$DIR/bin:$PATH"
 
 function compile() {
     $CC -Ilib/ \
-        -std=gnu99 -Wall -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
+        -std=gnu99 -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
         $CFLAGS $LDFLAGS $@ $LDLIBS;
 }
 
