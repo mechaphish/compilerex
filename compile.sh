@@ -3,7 +3,13 @@
 # Based on https://github.com/CyberGrandChallenge/cb-testing/blob/master/cgc-cb.mk
 # '-Wl,-mcgc_i386' is my addition, though, so that 'clang -o exe' works. [J]
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [ -L $0 ] ; then
+    DIR=$(dirname $(readlink -f $0)) ;
+else
+    DIR=$(dirname $0) ;
+fi ;
+# echo $DIR
 
 if [ "$#" -lt 1 ]; then
     echo "usage $0 <clang commands>";
