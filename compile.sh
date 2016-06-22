@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # copied from Jacopo's stuff
 
 # Based on https://github.com/CyberGrandChallenge/cb-testing/blob/master/cgc-cb.mk
