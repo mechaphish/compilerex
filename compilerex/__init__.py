@@ -1,1 +1,1 @@
-from compilerex import compile, compile_from_string
+from compilerex import compile, assemble, compile_from_string

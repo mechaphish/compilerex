@@ -13,6 +13,14 @@ def compile(args):
     res = p.communicate()
     return res
 
+def assemble(args):
+    if not isinstance(args, list):
+        args = [args]
+    path = os.path.join(os.path.dirname(__file__), "..", "assemble.sh")
+    p = subprocess.Popen(["bash", path] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    res = p.communicate()
+    return p.returncode, res
+
 def compile_from_string(c_str, filename=None):
     '''
     Compile a CGC binary from a C string.
