@@ -18,20 +18,31 @@ if [ "$#" -lt 1 ]; then
     exit 1
 fi
 
+
+### ELF
+#CC=gcc
+
+#function compile() {
+#    $CC -isystem$DIR/include -Ilib/ -std=gnu99 -O3 -Wall -Wno-unused-variable -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4 $CFLAGS $LDFLAGS $@ $LDLIBS;
+#}
+
+### CGC
+
 export CC=$DIR/bin/clang
 export LD=$DIR/bin/ld
 export CXX=$DIR/bin/clang++
 export OBJCOPY=$DIR/bin/objcopy
 
 export LDFLAGS="-nostdlib -static -Wl,-mcgc_i386 $LDFLAGS"
+export LDFLAGS="-nostdlib -static -Wl, $LDFLAGS"
 export  CFLAGS="-nostdlib -fno-builtin -nostdinc -isystem$DIR/include $CFLAGS"
-export LDLIBS="-L$DIR/lib -lcgc $LDLIBS"
+export LDLIBS="-L$DIR/lib -lc -lcgc $LDLIBS"
 
 export PATH="$DIR/bin:$PATH"
 
 function compile() {
     $CC -Ilib/ \
-        -std=gnu99 -Wall -Wno-unused-variable -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
+        -std=gnu99 -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-variable -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
         $CFLAGS $LDFLAGS $@ $LDLIBS;
 }
 

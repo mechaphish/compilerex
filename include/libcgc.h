@@ -5,7 +5,8 @@
 #define STDOUT 1
 #define STDERR 2
 
-#define	NULL ((void *)0)
+#undef NULL
+#define	NULL 0
 
 typedef long unsigned int size_t;
 typedef long signed int ssize_t;
