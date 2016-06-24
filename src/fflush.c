@@ -1,0 +1,4 @@
+
+int fflush(void *s) {
+    ;
+}
