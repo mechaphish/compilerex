@@ -10,9 +10,11 @@ extern int memcmp(void *s1, const void *s2, size_t n);
 extern void *memchr(const void *s, int c, size_t n);
 
 extern size_t strlen(const char *s);
+extern int strspn(const char *p, const char *s);
 extern char *strcpy(char *dest, const char *src);
 extern char *strncpy(char *dest, const char *src, size_t n);
 extern char *strchr(const char *s, int c);
+extern char *strrchr(const char *s, int c);
 extern char *strsep(char **stringp, const char *delim);
 extern int strcmp(const char *s1, const char *s2);
 extern int strncmp(const char *s1, const char *s2, size_t n);

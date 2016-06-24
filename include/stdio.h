@@ -11,7 +11,7 @@ extern char **environ;
 
 // file operations are nops
 #define vfprintf(stream, format, ap) {; }
-#define fputs(string, stream) {; }
+#define fputs(string, stream) do {printf("%s", string); } while (0)
 #define fputc(c, stream) {; }
 //#define fprintf(stream, format, ...) do {; } while(0)
 #define fprintf(stream, format, ARGS...) do {printf(format, ##ARGS); } while(0)
