@@ -7,11 +7,27 @@ typedef int FILE;
 #define stdout 1
 #define stderr 2
 
-// fprintf will be fdprintf
-#define fprintf(stream, format, ...) fdprintf((int)stream, format,__VA_ARGS__) 
-#define vfprintf(stream, format, ap) fdprintf((int)stream, format, ap)
-#define fputs(string, stream) fdprintf((int)stream, "%s", string)
-#define fputc(c, stream) fdputc(c, (int)stream)
-#define fflush(x) { }
+extern char **environ;
+
+// file operations are nops
+#define vfprintf(stream, format, ap) {; }
+#define fputs(string, stream) {; }
+#define fputc(c, stream) {; }
+//#define fprintf(stream, format, ...) do {; } while(0)
+#define fprintf(stream, format, ARGS...) do {printf(format, ##ARGS); } while(0)
+#define fflush(x) do {; } while(0)
+#define fclose(x) do {; } while(0)
+#define fopen(x, y) 1
+
+// hope we never hit these
+#define sleep(x) do {; } while (0)
+#define popen(x, y) 1
+#define pclose(x) do {; } while (0)
+#define abort() do {_terminate(1);} while (0)
+#define getenv(x) NULL
+#define getc(f) EOF
+#define getpid() 1
+
+#define EOF -1
 
 #endif /* !STDIO_H_ */

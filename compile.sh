@@ -36,13 +36,13 @@ export OBJCOPY=$DIR/bin/objcopy
 export LDFLAGS="-nostdlib -static -Wl,-mcgc_i386 $LDFLAGS"
 export LDFLAGS="-nostdlib -static -Wl, $LDFLAGS"
 export  CFLAGS="-nostdlib -fno-builtin -nostdinc -isystem$DIR/include $CFLAGS"
-export LDLIBS="-L$DIR/lib -lc -lcgc $LDLIBS"
+export LDLIBS="-L$DIR/lib -llgl -lc -lcgc $LDLIBS"
 
 export PATH="$DIR/bin:$PATH"
 
 function compile() {
     $CC -Ilib/ \
-        -std=gnu99 -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-variable -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
+        -std=gnu99 -fheinous-gnu-extensions -Wall -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
         $CFLAGS $LDFLAGS $@ $LDLIBS;
 }
 

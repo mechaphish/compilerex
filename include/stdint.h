@@ -39,4 +39,7 @@ typedef unsigned int uintptr_t;
 # define UINT64_MAX     (__UINT64_C(18446744073709551615))
 # define UINT_MAX       UINT32_MAX
 
+# define LLONG_MAX (9223372036854775807LL)
+# define LLONG_MIN (-LLONG_MAX - 1LL)
+
 #endif /* !STDINT_H_ */
