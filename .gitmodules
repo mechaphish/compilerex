@@ -1,0 +1,3 @@
+[submodule "boolector"]
+	path = boolector
+	url = git@git.seclab.cs.ucsb.edu:cgc/boolector.git
