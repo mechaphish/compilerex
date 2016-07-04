@@ -6,11 +6,14 @@
 #include <mymath.h>
 #define F32_PRECISION       0.00001
 
+#define CHAR_BIT 8
+
 char *environ_layer2[1] = {0};
 char **environ = environ_layer2;
 
-int abs(int j) {
-    return (j < 0) ? -j : j;
+int abs(int a) {
+       int mask = (a >> (sizeof(int) * CHAR_BIT - 1));
+          return (a + mask) ^ mask;
 }
 
 double atof(const char* str)
