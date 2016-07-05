@@ -42,7 +42,7 @@ export PATH="$DIR/bin:$PATH"
 
 function compile() {
     $CC -Ilib/ \
-        -std=gnu99 -fheinous-gnu-extensions -Wall -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
+        -std=gnu99 -Wall -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wextra -Wshadow -Wwrite-strings -Wpointer-arith -Wstrict-overflow=4  \
         $CFLAGS $LDFLAGS $@ $LDLIBS;
 }
 
