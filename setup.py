@@ -14,6 +14,7 @@ setup(
     version='0.1',
     packages=['compilerex'],
     install_requires=[
+        'python-magic'
     ],
     cmdclass={'build': build}
 )
