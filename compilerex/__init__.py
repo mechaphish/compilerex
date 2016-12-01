@@ -1,2 +1,2 @@
 from .compilerex import compile, clang_assemble, gcc_assemble, get_preferred_syntax, auto_assemble, \
-    compile_from_string, get_clang_args
+    compile_from_string, get_clang_args, c_to_asm
