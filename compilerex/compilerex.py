@@ -27,10 +27,13 @@ def compile_from_string(c_str, filename=None):
     '''
     Compile a CGC binary from a C string.
     Removes output file and original C file after compilation.
+
+    :param str c_str:   The source code to compile
+    :returns bytes:     The compiled binary
     '''
     c_file = tempfile.mktemp(dir='/tmp/', prefix="c_file_", suffix=".c")
 
-    with open(c_file, "wb") as f:
+    with open(c_file, "w") as f:
         f.write(c_str)
 
     outfile = filename
