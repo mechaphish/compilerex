@@ -43,7 +43,7 @@ def get_clang_args(filename):
             return ["-target", "x86", "-nostdlib", "-static", "-Wl,-m64"]
         elif "Intel 80386" in magic_string:
             return ["-nostdlib", "-static", "-Wl,-m32"]
-    elif start_bytes.startswith("\x7fCGC"):
+    elif start_bytes.startswith(b"\x7fCGC"):
         return ["-nostdlib", "-static", "-Wl,-mcgc_i386"]
     raise Exception("Unsupported file type (magic: '%s')" % (magic_string))
 
@@ -57,7 +57,7 @@ def auto_assemble(input_filename, asm_filename, output_filename, extra_opts=None
             return gcc_assemble(["-m64", asm_filename, "-o", output_filename] + extra_opts)
         elif "Intel 80386" in magic_string:
             return gcc_assemble(["-m32", asm_filename, "-o", output_filename] + extra_opts)
-    elif start_bytes.startswith("\x7fCGC"):
+    elif start_bytes.startswith(b"\x7fCGC"):
         return clang_assemble(["-nostdlib", "-static", "-Wl,-mcgc_i386", asm_filename, "-o", output_filename]
                               + extra_opts)
     raise Exception("Unsupported file type (magic: '%s')" % (magic_string))
@@ -73,7 +73,7 @@ def c_to_asm(c_str, compiler_flags=None, syntax="intel"):
 
     c_file = tempfile.mkstemp(prefix="c_patch_", suffix=".c")[1]
     with open(c_file, "wb") as f:
-        f.write(c_str)
+        f.write(c_str.encode('utf-8'))
 
     asm_file = tempfile.mkstemp(prefix="c_patch_output_", suffix=".s")[1]
     retcode, res = gcc_assemble([c_file, "-S", "-masm=" + syntax, "-o", asm_file] + compiler_flags)
@@ -82,7 +82,7 @@ def c_to_asm(c_str, compiler_flags=None, syntax="intel"):
         raise Exception("Error compiling c code: %s" % ("\n" + res[1]))
 
     with open(asm_file, "rb") as f:
-        lines = f.read().split("\n")
+        lines = f.read().decode('utf-8').split("\n")
 
     label_directive_re = re.compile(r"\.[a-zA-Z0-9_\?$#@~]+")
     label_re = re.compile(r"\.[a-zA-Z0-9_\?$#@~]+:")
@@ -101,7 +101,7 @@ def get_preferred_syntax(filename):
     magic_string = magic.from_file(filename)
     with open(filename, "rb") as f:
         start_bytes = f.read(0x100)
-    if start_bytes.startswith("\x7fCGC"):
+    if start_bytes.startswith(b"\x7fCGC"):
         return "at&t"
     else:
         return "intel"
