@@ -76,7 +76,7 @@ def c_to_asm(c_str, compiler_flags=None, syntax="intel"):
         f.write(c_str.encode('utf-8'))
 
     asm_file = tempfile.mkstemp(prefix="c_patch_output_", suffix=".s")[1]
-    retcode, res = gcc_assemble([c_file, "-S", "-masm=" + syntax, "-o", asm_file] + compiler_flags)
+    retcode, res = gcc_assemble([c_file, "-S", "-masm=" + syntax, "-fno-stack-protector", "-o", asm_file] + compiler_flags)
 
     if retcode != 0:
         raise Exception("Error compiling c code: %s" % ("\n" + res[1]))
