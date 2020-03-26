@@ -8,7 +8,7 @@ BIN_PATH = "bin"
 class build(_build):
     def run(self):
         for f in os.listdir(BIN_PATH):
-            os.chmod(os.path.join("bin", f), 0777)
+            os.chmod(os.path.join("bin", f), 0o777)
 
 
 setup(
