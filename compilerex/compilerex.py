@@ -72,8 +72,8 @@ def c_to_asm(c_str, compiler_flags=None, syntax="intel"):
         raise Exception("Unsupported syntax: %s" % (syntax))
 
     c_file = tempfile.mkstemp(prefix="c_patch_", suffix=".c")[1]
-    with open(c_file, "wb") as f:
-        f.write(c_str.encode('utf-8'))
+    with open(c_file, "w") as f:
+        f.write(c_str)
 
     asm_file = tempfile.mkstemp(prefix="c_patch_output_", suffix=".s")[1]
     retcode, res = gcc_assemble([c_file, "-S", "-masm=" + syntax, "-o", asm_file] + compiler_flags)
@@ -81,8 +81,8 @@ def c_to_asm(c_str, compiler_flags=None, syntax="intel"):
     if retcode != 0:
         raise Exception("Error compiling c code: %s" % ("\n" + res[1]))
 
-    with open(asm_file, "rb") as f:
-        lines = f.read().decode('utf-8').split("\n")
+    with open(asm_file, "r") as f:
+        lines = f.read().split("\n")
 
     label_directive_re = re.compile(r"\.[a-zA-Z0-9_\?$#@~]+")
     label_re = re.compile(r"\.[a-zA-Z0-9_\?$#@~]+:")
