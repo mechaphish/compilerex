@@ -10,7 +10,7 @@ class CompileError(Exception):
 def compile(args):
     if not isinstance(args, list):
         args = [args]
-    path = os.path.join(os.path.dirname(__file__), "..", "compile.sh")
+    path = os.path.join(os.path.dirname(__file__), "scripts", "compile.sh")
     p = subprocess.Popen(["bash", path] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res = p.communicate()
     returncode = p.wait()
@@ -19,7 +19,7 @@ def compile(args):
 def clang_assemble(args):
     if not isinstance(args, list):
         args = [args]
-    path = os.path.join(os.path.dirname(__file__), "..", "assemble.sh")
+    path = os.path.join(os.path.dirname(__file__), "scripts", "assemble.sh")
     p = subprocess.Popen(["bash", path] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res = p.communicate()
     returncode = p.wait()

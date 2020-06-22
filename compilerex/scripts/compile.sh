@@ -28,17 +28,17 @@ fi
 
 ### CGC
 
-export CC=$DIR/bin/clang
-export LD=$DIR/bin/ld
-export CXX=$DIR/bin/clang++
-export OBJCOPY=$DIR/bin/objcopy
+export CC=$DIR/../bin/clang
+export LD=$DIR/../bin/ld
+export CXX=$DIR/../bin/clang++
+export OBJCOPY=$DIR/../bin/objcopy
 
 export LDFLAGS="-nostdlib -static -Wl,-mcgc_i386 $LDFLAGS"
 export LDFLAGS="-nostdlib -static -Wl, $LDFLAGS"
-export  CFLAGS="-nostdlib -fno-builtin -nostdinc -isystem$DIR/include $CFLAGS"
-export LDLIBS="-L$DIR/lib -lboolector -llgl -lc -lcgc $LDLIBS"
+export  CFLAGS="-nostdlib -fno-builtin -nostdinc -isystem$DIR/../include $CFLAGS"
+export LDLIBS="-L$DIR/../lib -lboolector -llgl -lc -lcgc $LDLIBS"
 
-export PATH="$DIR/bin:$PATH"
+export PATH="$DIR/../bin:$PATH"
 
 function compile() {
     $CC -Ilib/ \

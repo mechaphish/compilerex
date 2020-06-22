@@ -12,12 +12,12 @@ if [ "$#" -lt 1 ]; then
     exit 1
 fi
 
-export CC=$DIR/bin/clang
-export LD=$DIR/bin/ld
-export CXX=$DIR/bin/clang++
-export OBJCOPY=$DIR/bin/objcopy
+export CC=$DIR/../bin/clang
+export LD=$DIR/../bin/ld
+export CXX=$DIR/../bin/clang++
+export OBJCOPY=$DIR/../bin/objcopy
 
-export PATH="$DIR/bin:$PATH"
+export PATH="$DIR/../bin:$PATH"
 
 function assemble() {
     #LDFLAGS="-nostdlib -static -Wl,-m$output_type $LDFLAGS"
