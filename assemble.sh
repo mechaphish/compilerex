@@ -17,13 +17,11 @@ export LD=$DIR/bin/ld
 export CXX=$DIR/bin/clang++
 export OBJCOPY=$DIR/bin/objcopy
 
-export LDFLAGS="-nostdlib -static -Wl,-mcgc_i386 $LDFLAGS"
-
 export PATH="$DIR/bin:$PATH"
 
 function assemble() {
-    $CC \
-    $LDFLAGS $@ ;
+    #LDFLAGS="-nostdlib -static -Wl,-m$output_type $LDFLAGS"
+    $CC "$@" ;
 }
 
-assemble $@
+assemble "$@"
