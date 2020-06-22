@@ -25,6 +25,10 @@ def clang_assemble(args):
     returncode = p.wait()
     return returncode, res
 
+
+# compatibility
+assemble = clang_assemble
+
 def gcc_assemble(args):
     if not isinstance(args, list):
         args = [args]
