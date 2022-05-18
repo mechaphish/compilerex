@@ -32,7 +32,7 @@ assemble = clang_assemble
 def gcc_assemble(args):
     if not isinstance(args, list):
         args = [args]
-    p = subprocess.Popen(["gcc", "-fno-stack-protector", "-no-pie",] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(["gcc", "-fcf-protection=none", "-fno-stack-protector", "-no-pie",] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res = p.communicate()
     returncode = p.wait()
     return returncode, res
