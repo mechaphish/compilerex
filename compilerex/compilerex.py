@@ -83,7 +83,7 @@ def c_to_asm(c_str, compiler_flags=None, syntax="intel"):
     retcode, res = gcc_assemble([c_file, "-S", "-masm=" + syntax, "-o", asm_file] + compiler_flags)
 
     if retcode != 0:
-        raise Exception("Error compiling c code: %s" % ("\n" + res[1]))
+        raise Exception("Error compiling c code: %s" % ("\n" + res[1].decode("utf-8")))
 
     with open(asm_file, "r") as f:
         lines = f.read().split("\n")
