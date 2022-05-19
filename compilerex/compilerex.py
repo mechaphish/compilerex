@@ -35,6 +35,13 @@ def gcc_assemble(args):
     p = subprocess.Popen(["gcc", "-fcf-protection=none", "-fno-stack-protector", "-no-pie",] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res = p.communicate()
     returncode = p.wait()
+
+    if b"unrecognized command line option '-fcf-protection=none'" in res[1]:
+        # this is an older version of GCC that does not support fcf-protection=none
+        p = subprocess.Popen(["gcc", "-fno-stack-protector", "-no-pie",] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        res = p.communicate()
+        returncode = p.wait()
+
     return returncode, res
 
 #obsolete
